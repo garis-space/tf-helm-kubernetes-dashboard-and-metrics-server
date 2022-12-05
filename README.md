@@ -16,12 +16,14 @@ kubectl config use-context docker-desktop
 ### Step 3 - Install Terraform for macOs (if not already installed)
 Download and install Terraform from https://www.terraform.io/downloads.html
 ```bash
-brew tap hashicorp/tap && brew install hashicorp/tap/terraform
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
 ```
 
 ### Step 4 - Clone this repository
 ```bash
-git clone https://github.com/garis-space/tf-helm-kubernetes-dashboard-and-metrics-server.git && cd tf-helm-kubernetes-dashboard-and-metrics-server
+git clone https://github.com/garis-space/tf-helm-kubernetes-dashboard-and-metrics-server.git
+cd tf-helm-kubernetes-dashboard-and-metrics-server
 ```
 
 ### Step 5 - Initialize Terraform
