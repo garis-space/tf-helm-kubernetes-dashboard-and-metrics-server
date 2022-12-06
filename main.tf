@@ -2,11 +2,11 @@ terraform {
   required_providers {
     # Kubernetes provider
     kubernetes = {
-      source  = "hashicorp/kubernetes"
+      source = "hashicorp/kubernetes"
     }
     # Helm provider
     helm = {
-      source  = "hashicorp/helm"
+      source = "hashicorp/helm"
     }
   }
 }
@@ -46,19 +46,19 @@ resource "kubernetes_namespace" "kubernetes_dashboard" {
 ###
 resource "helm_release" "kubernetes_dashboard" {
   # Name of the release in the cluster
-  name       = "kubernetes-dashboard"
+  name = "kubernetes-dashboard"
 
   # Name of the chart to install
   repository = "https://kubernetes.github.io/dashboard/"
 
   # Version of the chart to use
-  chart      = "kubernetes-dashboard"
+  chart = "kubernetes-dashboard"
 
   # Wait for the Kubernetes namespace to be created
   depends_on = [kubernetes_namespace.kubernetes_dashboard]
 
   # Set the namespace to install the release into
-  namespace  = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
+  namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
 
   # Set service type to LoadBalancer
   set {
@@ -105,19 +105,19 @@ resource "helm_release" "kubernetes_dashboard" {
 ###
 resource "helm_release" "metrics_server" {
   # Name of the release in the cluster
-  name       = "metrics-server"
+  name = "metrics-server"
 
   # Name of the chart to install
   repository = "https://kubernetes-sigs.github.io/metrics-server/"
 
   # Version of the chart to use
-  chart      = "metrics-server"
+  chart = "metrics-server"
 
   # Wait for the Kubernetes Dashboard and Kubernetes namespace to be created
   depends_on = [helm_release.kubernetes_dashboard, kubernetes_namespace.kubernetes_dashboard]
 
   # Set the namespace to install the release into
-  namespace  = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
+  namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
 
   # Recent updates to the Metrics Server do not work with self-signed certificates by default.
   # Since Docker For Desktop uses such certificates, you’ll need to allow insecure TLS
